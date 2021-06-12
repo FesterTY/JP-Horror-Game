@@ -97,9 +97,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.442, 2.65798, -42.9482 )
 [node name="Loc3" type="Spatial" parent="PatrolLoc"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -50.1269, 2.60362, -37.9982 )
 
-[node name="Page" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1.4914, 0, 0, 0, 2, 0, 0, 0, 2, -2.60563, 1.3317, 14.7188 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Pages" type="Spatial" parent="."]
+
+[node name="Page" parent="Pages" instance=ExtResource( 6 )]
+transform = Transform( 1.4914, 0, 0, 0, 2, 0, 0, 0, 2, -2.60563, 1.3317, 14.7188 )
 
 [connection signal="destination_reached" from="Navigation/Enemy" to="." method="_on_Enemy_destination_reached"]

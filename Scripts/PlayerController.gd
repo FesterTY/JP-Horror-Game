@@ -14,7 +14,7 @@ var mouse_sens = 0.1
 var snap
 
 var stamina = 100
-var stamina_rate = 0.5
+var stamina_rate = 0.7
 var stamina_regen = false
 var timer_started = false
 var adrenaline = false
@@ -30,9 +30,13 @@ onready var popup = $CanvasLayer/Control/Popup
 onready var enemy = get_owner().get_node("Navigation").get_node("Enemy")
 onready var stamina_bar = $CanvasLayer/Control/StaminaBar
 
+onready var page_collected = 0
+onready var page_count = get_owner().get_node("Pages").get_children().size()
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	enemy.connect("player_collide", self, "_on_enemy_player_collide")
+	display_pages()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -99,12 +103,18 @@ func _physics_process(delta):
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
 	if raycast.is_colliding():
 		popup.visible = true
-		page_pickup()
+		if Input.is_action_pressed("pickup"):
+			page_pickup()
 	else:
 		popup.visible = false
 	
 func page_pickup():
 	emit_signal("page_on_pickup")
+	page_collected += 1
+	display_pages()
+
+func display_pages():
+	$CanvasLayer/Control/PageUI/PageCount.text = str(page_collected) + "of" + str(page_count)
 	
 func _on_enemy_player_collide():
 	adrenaline = true
@@ -117,3 +127,6 @@ func _on_StaminaTimer_timeout():
 
 func _on_HealthRegen_timeout():
 	hp += 1
+
+func _on_AdrenalineTimer_timeout():
+	adrenaline = false

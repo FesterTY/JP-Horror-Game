@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Icons/crosshairs.png" type="Texture" id=2]
-[ext_resource path="res://Assets/UI/RedBar.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Icons/paper.png" type="Texture" id=3]
 [ext_resource path="res://Assets/UI/BarBackground.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sounds/hurt.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Assets/UI/Bar.png" type="Texture" id=6]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
@@ -19,12 +20,12 @@ region = Rect2( 0, 96, 48, 48 )
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 48, 48 )
+region = Rect2( 0, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 48, 48, 48 )
+region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
@@ -35,14 +36,21 @@ animations = [ {
 }, {
 "frames": [ SubResource( 4 ) ],
 "loop": false,
-"name": "inspect",
+"name": "pickup",
 "speed": 1.0
 }, {
 "frames": [ SubResource( 5 ) ],
 "loop": false,
-"name": "pickup",
+"name": "inspect",
 "speed": 1.0
 } ]
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://Assets/Fonts/HigherPixels.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+font_data = SubResource( 7 )
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 4
@@ -108,18 +116,58 @@ frames = SubResource( 6 )
 animation = "pickup"
 
 [node name="StaminaBar" type="TextureProgress" parent="CanvasLayer/Control"]
-margin_left = -911.346
-margin_top = -541.47
-margin_right = 112.654
-margin_bottom = 482.53
-rect_scale = Vector2( 0.25, 0.25 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -919.812
+margin_top = -575.947
+margin_right = 104.188
+margin_bottom = 448.053
+rect_scale = Vector2( 0.2, 0.2 )
 texture_under = ExtResource( 4 )
-texture_progress = ExtResource( 3 )
+texture_progress = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PageUI" type="Control" parent="CanvasLayer/Control"]
+margin_left = -900.099
+margin_top = -404.445
+margin_right = -699.099
+margin_bottom = -331.445
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/PageUI"]
+margin_left = 1.97968
+margin_top = 3.26103
+margin_right = 33.9797
+margin_bottom = 35.261
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PageCount" type="Label" parent="CanvasLayer/Control/PageUI"]
+margin_left = 83.9112
+margin_top = 19.8214
+margin_right = 187.911
+margin_bottom = 54.8214
+custom_fonts/font = SubResource( 8 )
+text = "0 of 5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StaminaTimer" type="Timer" parent="."]
+
+[node name="AdrenalineTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
 
 [node name="HealthRegen" type="Timer" parent="."]
 wait_time = 90.0
@@ -129,4 +177,5 @@ autostart = true
 stream = ExtResource( 5 )
 
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_StaminaTimer_timeout"]
+[connection signal="timeout" from="AdrenalineTimer" to="." method="_on_AdrenalineTimer_timeout"]
 [connection signal="timeout" from="HealthRegen" to="." method="_on_HealthRegen_timeout"]
