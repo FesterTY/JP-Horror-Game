@@ -14,7 +14,7 @@ var mouse_sens = 0.1
 var snap
 
 var stamina = 100
-var stamina_rate = 0.7
+var stamina_rate = 0.5
 var stamina_regen = false
 var timer_started = false
 var adrenaline = false
