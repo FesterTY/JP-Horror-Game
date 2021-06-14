@@ -1,6 +1,8 @@
 extends Spatial
 
-onready var locations = [$PatrolLoc/Loc1, $PatrolLoc/Loc2, $PatrolLoc/Loc3, $PatrolLoc/Loc4]
+onready var locations = [$PatrolLoc/Loc1, $PatrolLoc/Loc2, $PatrolLoc/Loc3, $PatrolLoc/Loc4,
+						$PatrolLoc/Loc5, $PatrolLoc/Loc6, $PatrolLoc/Loc7, $PatrolLoc/Loc8, $PatrolLoc/Loc9,
+						$PatrolLoc/Loc10, $PatrolLoc/Loc11, $PatrolLoc/Loc12]
 
 onready var enemy = $Navigation/Enemy
 onready var player = $Player
@@ -26,3 +28,4 @@ func _on_Enemy_destination_reached():
 		while current_loc == prev_loc:
 			current_loc = locations[rand_range(0,locations.size())]
 	enemy.set_target(current_loc)
+	print_debug(current_loc)

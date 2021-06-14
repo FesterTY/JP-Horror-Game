@@ -13,7 +13,7 @@ mid_height = 3.0
 [sub_resource type="CapsuleShape" id=3]
 
 [sub_resource type="SphereShape" id=4]
-radius = 30.0
+radius = 20.0
 
 [sub_resource type="BoxShape" id=5]
 

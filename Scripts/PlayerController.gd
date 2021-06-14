@@ -3,7 +3,7 @@ extends KinematicBody
 signal page_on_pickup()
 
 export var speed = 18
-export var sprint_spd = 27
+export var sprint_spd = 25
 export var chase_spd = 33
 export var accel = 40
 

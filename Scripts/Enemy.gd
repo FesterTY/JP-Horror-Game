@@ -4,7 +4,7 @@ signal destination_reached
 signal player_collide
 
 const WALK_SPEED = 8
-const CHASE_SPEED = 16
+const CHASE_SPEED = 13
 enum STATE {PATROL, CHASE}
 
 var current_state = STATE.PATROL

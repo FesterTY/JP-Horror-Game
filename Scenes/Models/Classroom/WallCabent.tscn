@@ -51,7 +51,7 @@ surfaces/0 = {
 [sub_resource type="BoxShape" id=4]
 
 [node name="WallCabent" type="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8826, 0.639017, 20.793 )
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 1.8826, 0.639017, 20.793 )
 
 [node name="wall cabent" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
