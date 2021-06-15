@@ -28,4 +28,3 @@ func _on_Enemy_destination_reached():
 		while current_loc == prev_loc:
 			current_loc = locations[rand_range(0,locations.size())]
 	enemy.set_target(current_loc)
-	print_debug(current_loc)

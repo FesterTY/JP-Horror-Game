@@ -120,6 +120,7 @@ func _on_enemy_player_collide():
 	adrenaline = true
 	hp -= 1
 	$Hurt.play()
+	$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("attacked")
 
 func _on_StaminaTimer_timeout():
 	stamina_regen = true
@@ -127,6 +128,7 @@ func _on_StaminaTimer_timeout():
 
 func _on_HealthRegen_timeout():
 	hp += 1
+	$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("fade_out")
 
 func _on_AdrenalineTimer_timeout():
 	adrenaline = false

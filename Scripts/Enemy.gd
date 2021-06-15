@@ -3,7 +3,7 @@ extends KinematicBody
 signal destination_reached
 signal player_collide
 
-const WALK_SPEED = 8
+const WALK_SPEED = 9
 const CHASE_SPEED = 13
 enum STATE {PATROL, CHASE}
 
@@ -36,12 +36,12 @@ func move_along_path(path, state, delta):
 		path.remove(0)
 	if state == STATE.CHASE:
 		motion = (current_path-translation).normalized() * CHASE_SPEED
+		look_at(current_path, Vector3.UP)
 	elif state == STATE.PATROL:
 		if global_transform.origin.distance_to(target.global_transform.origin) < 3:
 			emit_signal("destination_reached")
 		motion = (current_path-translation).normalized() * WALK_SPEED
 	motion = move_and_slide(motion)
-	look_at(current_path, Vector3.UP)
 
 func set_target(_target):
 	self.target = _target
@@ -56,11 +56,15 @@ func _on_PlayerDetect_body_entered(body):
 		jumpscare_allowed = false
 	#MusicController.music = get_owner().get_node("Chase")
 	#MusicController.play_music()
+	$Footsteps.stream = load("res://Assets/Sounds/wood_run.wav")
+	$Footsteps.play()
 
 
 func _on_PlayerDetect_body_exited(body):
 	current_state = STATE.PATROL
-	#MusicController.stop_music()	
+	#MusicController.stop_music()
+	$Footsteps.stream = load("res://Assets/Sounds/wood_walk.wav")
+	$Footsteps.play()
 
 func _on_DamageArea_body_entered(body):
 	if attack_allowed:

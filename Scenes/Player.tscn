@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Icons/crosshairs.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/UI/BarBackground.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sounds/hurt.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Assets/UI/Bar.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/blood_overlay.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
@@ -15,12 +16,12 @@ mid_height = 3.0
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 96, 48, 48 )
+region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 48, 48 )
+region = Rect2( 0, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
@@ -31,12 +32,12 @@ region = Rect2( 0, 48, 48, 48 )
 animations = [ {
 "frames": [ SubResource( 3 ) ],
 "loop": false,
-"name": "interact",
+"name": "inspect",
 "speed": 1.0
 }, {
 "frames": [ SubResource( 4 ) ],
 "loop": false,
-"name": "inspect",
+"name": "interact",
 "speed": 1.0
 }, {
 "frames": [ SubResource( 5 ) ],
@@ -51,6 +52,62 @@ font_path = "res://Assets/Fonts/HigherPixels.ttf"
 [sub_resource type="DynamicFont" id=8]
 size = 40
 font_data = SubResource( 7 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=13]
+resource_name = "attacked"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../BloodScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.317647 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 4
@@ -163,6 +220,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Overlay" type="Control" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.35132
+margin_top = -3.35107
+margin_right = 36.6487
+margin_bottom = 36.6489
+rect_scale = Vector2( 1.52, 1.4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BloodOverlay" type="AnimatedSprite" parent="CanvasLayer/Overlay"]
+modulate = Color( 1, 1, 1, 0 )
+frames = SubResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Overlay/BloodOverlay"]
+anims/attacked = SubResource( 13 )
+anims/fade_out = SubResource( 10 )
+
+[node name="BloodScreen" type="Sprite" parent="CanvasLayer/Overlay"]
+modulate = Color( 0, 0, 0, 0 )
+scale = Vector2( 0.656, 1000 )
+z_index = 10
+texture = SubResource( 12 )
+
 [node name="StaminaTimer" type="Timer" parent="."]
 
 [node name="AdrenalineTimer" type="Timer" parent="."]
@@ -170,7 +255,7 @@ wait_time = 20.0
 autostart = true
 
 [node name="HealthRegen" type="Timer" parent="."]
-wait_time = 90.0
+wait_time = 30.0
 autostart = true
 
 [node name="Hurt" type="AudioStreamPlayer" parent="."]
