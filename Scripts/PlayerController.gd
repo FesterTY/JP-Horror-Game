@@ -1,6 +1,6 @@
 extends KinematicBody
 
-signal page_on_pickup()
+signal page_on_pickup(name)
 
 export var speed = 18
 export var sprint_spd = 25
@@ -101,17 +101,22 @@ func _physics_process(delta):
 		movement = Vector3().linear_interpolate(direction * speed, accel * delta)
 		sprinting = false
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
+	if movement != Vector3.ZERO and $Sounds/Step.stream_paused:
+		$Sounds/Step.stream_paused = false
+	elif movement == Vector3.ZERO:
+		$Sounds/Step.stream_paused = true
 	if raycast.is_colliding():
 		popup.visible = true
 		if Input.is_action_pressed("pickup"):
-			page_pickup()
+			page_pickup(raycast.get_collider().get_parent().name)
 	else:
 		popup.visible = false
 	
-func page_pickup():
-	emit_signal("page_on_pickup")
+func page_pickup(name):
+	emit_signal("page_on_pickup", name)
 	page_collected += 1
 	display_pages()
+	$Sounds/PagePickUp.play()
 
 func display_pages():
 	$CanvasLayer/Control/PageUI/PageCount.text = str(page_collected) + "of" + str(page_count)
@@ -119,7 +124,7 @@ func display_pages():
 func _on_enemy_player_collide():
 	adrenaline = true
 	hp -= 1
-	$Hurt.play()
+	$Sounds/Hurt.play()
 	$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("attacked")
 
 func _on_StaminaTimer_timeout():

@@ -56,14 +56,14 @@ func _on_PlayerDetect_body_entered(body):
 		jumpscare_allowed = false
 	#MusicController.music = get_owner().get_node("Chase")
 	#MusicController.play_music()
-	$Footsteps.stream = load("res://Assets/Sounds/wood_run.wav")
+	$Footsteps.stream = load("res://Assets/Sounds/Chase/wood_run.wav")
 	$Footsteps.play()
 
 
 func _on_PlayerDetect_body_exited(body):
 	current_state = STATE.PATROL
 	#MusicController.stop_music()
-	$Footsteps.stream = load("res://Assets/Sounds/wood_walk.wav")
+	$Footsteps.stream = load("res://Assets/Sounds/Idle/wood_walk.wav")
 	$Footsteps.play()
 
 func _on_DamageArea_body_entered(body):

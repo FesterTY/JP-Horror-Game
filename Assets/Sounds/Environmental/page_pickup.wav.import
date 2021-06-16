@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/page_pickup.wav-1e9c980b6d3a67771952961a5a5dc20a.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Environmental/page_pickup.wav"
+dest_files=[ "res://.import/page_pickup.wav-1e9c980b6d3a67771952961a5a5dc20a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

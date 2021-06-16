@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Models/Classroom/old wood planks.material" type="Material" id=1]
+[ext_resource path="res://Assets/Textures/woodplanks2.png" type="Texture" id=2]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "door frame "
@@ -17,22 +18,27 @@ surfaces/0 = {
 "vertex_count": 69
 }
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.196078, 0.196078, 0.196078, 0.317647 )
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 3, 3, 3 )
+
+[sub_resource type="BoxShape" id=3]
 
 [node name="Door Frame" type="StaticBody"]
 
 [node name="door frame " type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
-material/0 = null
+material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.236294, 0, 0, 0, 0.252542, 0, 0, 0, 2.99558, 0.0760348, 1.7242, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 0.115455, 0, 0, 0, 2.3357, 0, 0, 0, 0.23157, -0.00754425, -0.669936, 2.76532 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 0.115455, 0, 0, 0, 2.3357, 0, 0, 0, 0.23157, -0.00754425, -0.669936, -2.77393 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )

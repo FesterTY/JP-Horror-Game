@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Icons/crosshairs.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Assets/Sounds/hurt.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Assets/UI/Bar.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UI/blood_overlay.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sounds/Idle/breathe.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/Idle/footstep.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/Environmental/page_pickup.wav" type="AudioStream" id=10]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
@@ -61,7 +64,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=10]
 resource_name = "attacked"
 tracks/0/type = "value"
 tracks/0/path = NodePath("../BloodScreen:modulate")
@@ -88,8 +91,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.317647 ) ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "fade_out"
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -103,11 +105,11 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Gradient" id=11]
+[sub_resource type="Gradient" id=12]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=12]
-gradient = SubResource( 11 )
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 4
@@ -239,14 +241,14 @@ modulate = Color( 1, 1, 1, 0 )
 frames = SubResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Overlay/BloodOverlay"]
-anims/attacked = SubResource( 13 )
-anims/fade_out = SubResource( 10 )
+anims/attacked = SubResource( 10 )
+anims/fade_out = SubResource( 11 )
 
 [node name="BloodScreen" type="Sprite" parent="CanvasLayer/Overlay"]
 modulate = Color( 0, 0, 0, 0 )
 scale = Vector2( 0.656, 1000 )
 z_index = 10
-texture = SubResource( 12 )
+texture = SubResource( 13 )
 
 [node name="StaminaTimer" type="Timer" parent="."]
 
@@ -258,8 +260,23 @@ autostart = true
 wait_time = 30.0
 autostart = true
 
-[node name="Hurt" type="AudioStreamPlayer" parent="."]
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="Hurt" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 5 )
+
+[node name="Step" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 9 )
+volume_db = -2.0
+autoplay = true
+stream_paused = true
+
+[node name="Breathe" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 8 )
+
+[node name="PagePickUp" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = 2.0
 
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_StaminaTimer_timeout"]
 [connection signal="timeout" from="AdrenalineTimer" to="." method="_on_AdrenalineTimer_timeout"]
