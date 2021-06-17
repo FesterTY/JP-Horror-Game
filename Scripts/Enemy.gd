@@ -58,6 +58,7 @@ func _on_PlayerDetect_body_entered(body):
 	#MusicController.play_music()
 	$Footsteps.stream = load("res://Assets/Sounds/Chase/wood_run.wav")
 	$Footsteps.play()
+	MusicController.fade_out()
 
 
 func _on_PlayerDetect_body_exited(body):
@@ -65,6 +66,7 @@ func _on_PlayerDetect_body_exited(body):
 	#MusicController.stop_music()
 	$Footsteps.stream = load("res://Assets/Sounds/Idle/wood_walk.wav")
 	$Footsteps.play()
+	MusicController.fade_in()
 
 func _on_DamageArea_body_entered(body):
 	if attack_allowed:

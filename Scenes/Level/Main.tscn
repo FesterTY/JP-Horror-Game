@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Models/Classroom/StudentDesk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -14,16 +14,17 @@
 [ext_resource path="res://Scenes/SoundTrigger.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Sounds/Environmental/woman_laugh.wav" type="AudioStream" id=13]
 [ext_resource path="res://Scenes/Models/Books/book001.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Textures/rustywall2.jpg" type="Texture" id=15]
+[ext_resource path="res://Assets/Textures/treewood.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/Page.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Models/Books/book002.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Models/Books/book005.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Level/WorldEnvironment.tres" type="Environment" id=19]
+[ext_resource path="res://Assets/Sounds/Music/ambient.wav" type="AudioStream" id=20]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=4]
 flags_world_triplanar = true
 albedo_texture = ExtResource( 15 )
-uv1_scale = Vector3( 0.2, 0.2, 0.2 )
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
 uv1_triplanar = true
 
 [sub_resource type="NavigationMesh" id=2]
@@ -41,7 +42,7 @@ script = ExtResource( 5 )
 
 [node name="Ceiling" parent="." instance=ExtResource( 11 )]
 transform = Transform( 40, 0, 0, 0, -0.5, 2.18557e-06, 0, -4.37114e-08, -25, 26.4, 4.04993, 31.2 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 4 )
 
 [node name="Navigation" type="Navigation" parent="."]
 
@@ -209,5 +210,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101.288, 1.3565, 31.2297 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.67826, 0.236351 )
 stream = ExtResource( 13 )
 unit_db = 10.0
+
+[node name="MusicTween" type="Tween" parent="."]
+
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -20.0
+autoplay = true
 
 [connection signal="destination_reached" from="Navigation/Enemy" to="." method="_on_Enemy_destination_reached"]

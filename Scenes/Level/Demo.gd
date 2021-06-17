@@ -15,6 +15,10 @@ func _ready():
 	enemy.set_nav(nav)
 	enemy.set_target(player)
 	current_loc = locations[rand_range(0,locations.size())]
+	MusicController.music = $Ambient
+	MusicController.tween = $MusicTween
+	MusicController.default_db = -20
+	MusicController.fade_in()
 
 func _process(delta):
 	if enemy.current_state == enemy.STATE.PATROL:
