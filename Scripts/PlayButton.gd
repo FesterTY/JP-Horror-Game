@@ -9,4 +9,5 @@ func _on_PlayButton_pressed():
 	MusicController.fade_out()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	get_tree().change_scene("res://Scenes/Level/Main.tscn")
+	if anim_name == "load_scene":
+		get_tree().change_scene("res://Scenes/Level/Main.tscn")

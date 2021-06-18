@@ -20,6 +20,8 @@ var timer_started = false
 var adrenaline = false
 var sprinting = false
 
+var gameOverAnim = true
+
 var direction = Vector3()
 var movement = Vector3()
 
@@ -30,6 +32,8 @@ onready var popup = $CanvasLayer/Control/Popup
 onready var enemy = get_owner().get_node("Navigation").get_node("Enemy")
 onready var stamina_bar = $CanvasLayer/Control/StaminaBar
 
+onready var animationPlayer = $CanvasLayer/Overlay/BloodOverlay/AnimationPlayer
+
 onready var page_collected = 0
 onready var page_count = get_owner().get_node("Pages").get_children().size()
 
@@ -37,6 +41,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	enemy.connect("player_collide", self, "_on_enemy_player_collide")
 	display_pages()
+	animationPlayer.play("scene_loaded")
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -45,8 +50,10 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
 
 func _process(delta):
-	if hp == 0:
-		get_tree().reload_current_scene()
+	if hp == 0 and gameOverAnim:
+		animationPlayer.play("ScenesGameOver")
+		gameOverAnim = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	elif hp > 3:
 		hp = 3
 	elif hp < 0:
@@ -90,7 +97,9 @@ func _physics_process(delta):
 	direction = Vector3(h_input, 0, f_input).rotated(Vector3.UP, h_rot).normalized()
 	snap = get_floor_normal()
 	# its move time!!
-	if adrenaline:
+	if hp <= 0:
+		movement = Vector3.ZERO
+	elif adrenaline:
 		movement = Vector3().linear_interpolate(direction * chase_spd, accel * delta)
 		sprinting = false
 	elif Input.is_action_pressed("sprint") and stamina > 0:
@@ -124,8 +133,9 @@ func display_pages():
 func _on_enemy_player_collide():
 	adrenaline = true
 	hp -= 1
-	$Sounds/Hurt.play()
-	$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("attacked")
+	if hp > 0:
+		$Sounds/Hurt.play()
+		$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("attacked")
 
 func _on_StaminaTimer_timeout():
 	stamina_regen = true
@@ -136,4 +146,11 @@ func _on_HealthRegen_timeout():
 	$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("fade_out")
 
 func _on_AdrenalineTimer_timeout():
-	adrenaline = false
+	adrenaline = false	
+
+func _on_Button_pressed():
+	animationPlayer.play("load_scene")
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "load_scene":
+		get_tree().reload_current_scene()

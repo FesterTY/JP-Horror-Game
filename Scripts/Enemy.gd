@@ -4,7 +4,7 @@ signal destination_reached
 signal player_collide
 
 const WALK_SPEED = 9
-const CHASE_SPEED = 13
+const CHASE_SPEED = 15
 enum STATE {PATROL, CHASE}
 
 var current_state = STATE.PATROL
@@ -74,6 +74,9 @@ func _on_DamageArea_body_entered(body):
 		body.transform.origin - transform.origin
 		$AttackTimer.start()
 		attack_allowed = false
+	if !(body.hp > 0):
+		$Footsteps.playing = false
+		$Jumpscare.playing = false
 
 func _on_JumpScareTimer_timeout():
 	jumpscare_allowed = true
