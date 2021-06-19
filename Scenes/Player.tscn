@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Icons/crosshairs.png" type="Texture" id=2]
@@ -12,46 +12,47 @@
 [ext_resource path="res://Assets/Sounds/Environmental/page_pickup.wav" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Fonts/PixelatedFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Assets/Animations/ScenesGameOver.tres" type="Animation" id=12]
+[ext_resource path="res://Scenes/BlackOverlay.tscn" type="PackedScene" id=13]
 
-[sub_resource type="CapsuleMesh" id=2]
+[sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=2]
 
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 96, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 48, 48, 48 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": false,
-"name": "inspect",
+"name": "pickup",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 5 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": false,
 "name": "interact",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 6 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": false,
-"name": "pickup",
+"name": "inspect",
 "speed": 1.0
 } ]
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
@@ -59,7 +60,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "attacked"
 length = 0.5
 tracks/0/type = "value"
@@ -69,7 +70,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.317647 ) ]
@@ -84,10 +85,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0.137255 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -95,13 +96,25 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.317647 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BloodScreen:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0.137255 ), Color( 1, 0, 0, 0 ) ]
+}
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=10]
 resource_name = "load_scene"
 tracks/0/type = "value"
 tracks/0/path = NodePath("../../GameOver/BlackOverlay:modulate")
@@ -116,7 +129,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=11]
 resource_name = "scene_loaded"
 tracks/0/type = "value"
 tracks/0/path = NodePath("../../GameOver/BlackOverlay:modulate")
@@ -131,16 +144,16 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=12]
 font_path = "res://Assets/Fonts/HigherPixels.ttf"
 
 [sub_resource type="DynamicFont" id=13]
 size = 120
-font_data = SubResource( 1 )
+font_data = SubResource( 12 )
 
 [sub_resource type="DynamicFont" id=14]
 size = 50
-font_data = SubResource( 1 )
+font_data = SubResource( 12 )
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 4
@@ -166,12 +179,12 @@ collision_mask = 2
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-mesh = SubResource( 2 )
+mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.93514, 0, 0, 0, -1.11989e-07, -2.56201, 0, 1.01114, -4.41984e-08, -0.0860502, 0.0522175, 0.0772798 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -202,7 +215,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CanvasLayer/Control/Popup"]
-frames = SubResource( 7 )
+frames = SubResource( 6 )
 animation = "pickup"
 
 [node name="StaminaBar" type="TextureProgress" parent="CanvasLayer/Control"]
@@ -264,14 +277,14 @@ __meta__ = {
 [node name="BloodOverlay" type="AnimatedSprite" parent="CanvasLayer/Overlay"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 633.007, 394.541 )
-frames = SubResource( 8 )
+frames = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Overlay/BloodOverlay"]
 anims/ScenesGameOver = ExtResource( 12 )
-anims/attacked = SubResource( 9 )
-anims/fade_out = SubResource( 10 )
-anims/load_scene = SubResource( 15 )
-anims/scene_loaded = SubResource( 16 )
+anims/attacked = SubResource( 8 )
+anims/fade_out = SubResource( 9 )
+anims/load_scene = SubResource( 10 )
+anims/scene_loaded = SubResource( 11 )
 
 [node name="BloodScreen" type="ColorRect" parent="CanvasLayer/Overlay"]
 modulate = Color( 1, 1, 1, 0 )
@@ -334,14 +347,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer/GameOver"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="BlackOverlay" parent="CanvasLayer/GameOver" instance=ExtResource( 13 )]
 
 [node name="Button" type="Button" parent="CanvasLayer/GameOver"]
 modulate = Color( 1, 1, 1, 0 )
@@ -361,8 +367,7 @@ wait_time = 20.0
 autostart = true
 
 [node name="HealthRegen" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
+wait_time = 20.0
 
 [node name="Sounds" type="Spatial" parent="."]
 

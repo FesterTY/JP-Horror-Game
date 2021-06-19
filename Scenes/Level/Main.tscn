@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Models/Classroom/StudentDesk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Scenes/Models/Books/book005.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Level/WorldEnvironment.tres" type="Environment" id=19]
 [ext_resource path="res://Assets/Sounds/Music/ambient.wav" type="AudioStream" id=20]
+[ext_resource path="res://Scenes/Models/Books/book006.tscn" type="PackedScene" id=21]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_world_triplanar = true
@@ -107,7 +108,7 @@ transform = Transform( 2.1, 0, 0, 0, 4.20443, 0, 0, 0, 5.73772, 121.181, 0, 18 )
 shape = SubResource( 3 )
 
 [node name="Enemy" parent="Navigation" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 63.6251, -0.6, 50.5391 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 139.362, -0.6, -23.8145 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -81.4, 0.40151, 13.3409 )
@@ -143,6 +144,18 @@ transform = Transform( 1.23384, 0, -1.1235, 0, 2, 0, 0.837796, 0, 1.65461, 12.72
 
 [node name="book005" parent="Pages/Page5" instance=ExtResource( 18 )]
 transform = Transform( 1.65969, 0, 0, 0, 0.5, 0, 0, 0, 0.597874, 0, 0, 0 )
+
+[node name="Page6" parent="Pages" instance=ExtResource( 16 )]
+transform = Transform( 1.4914, 0, 0, 0, 2, 0, 0, 0, 2, 59.536, 0.472184, -11.9464 )
+
+[node name="book006" parent="Pages/Page6" instance=ExtResource( 21 )]
+transform = Transform( 1.10375, 0, 0.943718, 0, 1.02734, 0, -0.815261, 0, 0.710468, 0.280037, -1.19621, -0.05305 )
+
+[node name="Page7" parent="Pages" instance=ExtResource( 16 )]
+transform = Transform( 0.0641956, 0, 1.99814, 0, 2, 0, -1.49001, 0, 0.0860878, 64.9535, 0.472184, 50.4746 )
+
+[node name="book006" parent="Pages/Page7" instance=ExtResource( 21 )]
+transform = Transform( 1.10375, 0, 0.943718, 0, 1.02734, 0, -0.815261, 0, 0.710468, 0.280037, -1.19621, -0.05305 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 19 )

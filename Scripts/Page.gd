@@ -1,7 +1,6 @@
 extends Spatial
 
 onready var player = get_owner().get_node("Player")
-onready var popup = $CanvasLayer/Control/Popup
 
 
 func _ready():
@@ -9,5 +8,4 @@ func _ready():
 
 func _page_on_pickup(name):
 	if name == self.name:
-		print_debug(self.name)
 		queue_free()

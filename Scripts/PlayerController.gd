@@ -21,6 +21,8 @@ var adrenaline = false
 var sprinting = false
 
 var gameOverAnim = true
+var gameOver = false
+var victory = false
 
 var direction = Vector3()
 var movement = Vector3()
@@ -126,6 +128,10 @@ func page_pickup(name):
 	page_collected += 1
 	display_pages()
 	$Sounds/PagePickUp.play()
+	if page_collected == page_count:
+		enemy.stop()
+		animationPlayer.play("load_scene")
+		victory = true
 
 func display_pages():
 	$CanvasLayer/Control/PageUI/PageCount.text = str(page_collected) + "of" + str(page_count)
@@ -136,6 +142,7 @@ func _on_enemy_player_collide():
 	if hp > 0:
 		$Sounds/Hurt.play()
 		$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("attacked")
+		$HealthRegen.start()
 
 func _on_StaminaTimer_timeout():
 	stamina_regen = true
@@ -143,7 +150,9 @@ func _on_StaminaTimer_timeout():
 
 func _on_HealthRegen_timeout():
 	hp += 1
-	$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("fade_out")
+	print_debug($CanvasLayer/Overlay/BloodOverlay.modulate.a)
+	if $CanvasLayer/Overlay/BloodOverlay.modulate.a > 0.1:
+		$CanvasLayer/Overlay/BloodOverlay/AnimationPlayer.play("fade_out")
 
 func _on_AdrenalineTimer_timeout():
 	adrenaline = false	
@@ -153,4 +162,7 @@ func _on_Button_pressed():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "load_scene":
-		get_tree().reload_current_scene()
+		if victory:
+			get_tree().change_scene("res://Scenes/Level/VictoryScreen.tscn")
+		elif gameOver:
+			get_tree().reload_current_scene()

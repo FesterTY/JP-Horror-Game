@@ -69,14 +69,13 @@ func _on_PlayerDetect_body_exited(body):
 	MusicController.fade_in()
 
 func _on_DamageArea_body_entered(body):
+	if body.hp <= 0:
+		stop()
 	if attack_allowed:
 		emit_signal("player_collide")
 		body.transform.origin - transform.origin
 		$AttackTimer.start()
 		attack_allowed = false
-	if !(body.hp > 0):
-		$Footsteps.playing = false
-		$Jumpscare.playing = false
 
 func _on_JumpScareTimer_timeout():
 	jumpscare_allowed = true
@@ -87,3 +86,7 @@ func _on_AttackTimer_timeout():
 	if $DamageArea.overlaps_body(player):
 		_on_DamageArea_body_entered(player)
 
+func stop():
+	$Footsteps.playing = false
+	$Jumpscare.playing = false
+	attack_allowed = false
