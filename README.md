@@ -1,1 +1,1 @@
-<p>Work in progress!</p>
+This is an **open source** project. You are free to distribute, edit or commercialize it under the [MIT](https://choosealicense.com/licenses/mit/) license.
