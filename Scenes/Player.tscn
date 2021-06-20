@@ -14,45 +14,45 @@
 [ext_resource path="res://Assets/Animations/ScenesGameOver.tres" type="Animation" id=12]
 [ext_resource path="res://Scenes/BlackOverlay.tscn" type="PackedScene" id=13]
 
-[sub_resource type="CapsuleMesh" id=2]
+[sub_resource type="CapsuleMesh" id=1]
 mid_height = 3.0
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 48, 48 )
+region = Rect2( 0, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 96, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 48, 48, 48 )
-
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": false,
 "name": "inspect",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": false,
+"name": "pickup",
 "speed": 1.0
 }, {
 "frames": [ SubResource( 5 ) ],
 "loop": false,
 "name": "interact",
 "speed": 1.0
-}, {
-"frames": [ SubResource( 6 ) ],
-"loop": false,
-"name": "pickup",
-"speed": 1.0
 } ]
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
@@ -60,7 +60,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=8]
 resource_name = "Tutorial"
 length = 15.0
 
@@ -180,12 +180,12 @@ collision_mask = 2
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-mesh = SubResource( 2 )
+mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.93514, 0, 0, 0, -1.11989e-07, -2.56201, 0, 1.01114, -4.41984e-08, -0.0860502, 0.0522175, 0.0772798 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -216,7 +216,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CanvasLayer/Control/Popup"]
-frames = SubResource( 7 )
+frames = SubResource( 6 )
 animation = "pickup"
 
 [node name="StaminaBar" type="TextureProgress" parent="CanvasLayer/Control"]
@@ -251,6 +251,7 @@ margin_top = 3.26103
 margin_right = 33.9797
 margin_bottom = 35.261
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -278,11 +279,11 @@ __meta__ = {
 [node name="BloodOverlay" type="AnimatedSprite" parent="CanvasLayer/Overlay"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 633.007, 394.541 )
-frames = SubResource( 8 )
+frames = SubResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Overlay/BloodOverlay"]
 anims/ScenesGameOver = ExtResource( 12 )
-anims/Tutorial = SubResource( 17 )
+anims/Tutorial = SubResource( 8 )
 anims/attacked = SubResource( 9 )
 anims/fade_out = SubResource( 10 )
 anims/load_scene = SubResource( 11 )
@@ -294,6 +295,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -644.0
 margin_bottom = -297.0
+mouse_filter = 2
 color = Color( 0.929412, 0.466667, 0.466667, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -310,6 +312,7 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -350,14 +353,21 @@ __meta__ = {
 }
 
 [node name="BlackOverlay" parent="CanvasLayer/GameOver" instance=ExtResource( 13 )]
+mouse_filter = 2
 
 [node name="Button" type="Button" parent="CanvasLayer/GameOver"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 805.49
-margin_top = 563.51
-margin_right = 1112.49
-margin_bottom = 623.51
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -164.551
+margin_top = 18.449
+margin_right = -152.551
+margin_bottom = 45.449
+rect_scale = Vector2( 26.96, 2.28 )
 mouse_default_cursor_shape = 2
+disabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

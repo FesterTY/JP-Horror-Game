@@ -147,15 +147,9 @@ transform = Transform( 1.23384, 0, -1.1235, 0, 2, 0, 0.837796, 0, 1.65461, 12.72
 transform = Transform( 1.65969, 0, 0, 0, 0.5, 0, 0, 0, 0.597874, 0, 0, 0 )
 
 [node name="Page6" parent="Pages" instance=ExtResource( 16 )]
-transform = Transform( 1.4914, 0, 0, 0, 2, 0, 0, 0, 2, 59.536, 0.472184, -11.9464 )
-
-[node name="book006" parent="Pages/Page6" instance=ExtResource( 21 )]
-transform = Transform( 1.10375, 0, 0.943718, 0, 1.02734, 0, -0.815261, 0, 0.710468, 0.280037, -1.19621, -0.05305 )
-
-[node name="Page7" parent="Pages" instance=ExtResource( 16 )]
 transform = Transform( 0.0641956, 0, 1.99814, 0, 2, 0, -1.49001, 0, 0.0860878, 64.9535, 0.472184, 50.4746 )
 
-[node name="book006" parent="Pages/Page7" instance=ExtResource( 21 )]
+[node name="book006" parent="Pages/Page6" instance=ExtResource( 21 )]
 transform = Transform( 1.10375, 0, 0.943718, 0, 1.02734, 0, -0.815261, 0, 0.710468, 0.280037, -1.19621, -0.05305 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

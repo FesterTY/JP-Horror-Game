@@ -202,7 +202,7 @@ margin_top = -81.0
 margin_right = 477.5
 margin_bottom = 81.0
 custom_fonts/font = SubResource( 2 )
-text = "WITH 7 BOOKS IN HAND
+text = "WITH 6 BOOKS IN HAND
 YOU GASP FOR AIR"
 align = 1
 __meta__ = {

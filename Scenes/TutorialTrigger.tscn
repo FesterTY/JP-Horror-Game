@@ -11,7 +11,7 @@ font_path = "res://Assets/Fonts/HigherPixels.ttf"
 size = 20
 font_data = SubResource( 2 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "MOUSE"
 length = 6.0
 tracks/0/type = "value"
@@ -39,7 +39,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "PICKUP"
 length = 6.0
 tracks/0/type = "value"
@@ -55,8 +55,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "WASD"
+[sub_resource type="Animation" id=6]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("WASD:modulate")
@@ -85,6 +84,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1.26001
 margin_right = -1.26001
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -153,10 +153,13 @@ margin_bottom = -213.0
 custom_fonts/font = SubResource( 3 )
 text = "WHEN LOOKING AT A BOOK, PRESS MOUSE1 TO PICK UP"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Tutorial"]
-anims/MOUSE = SubResource( 5 )
-anims/PICKUP = SubResource( 6 )
-anims/WASD = SubResource( 4 )
+anims/MOUSE = SubResource( 4 )
+anims/PICKUP = SubResource( 5 )
+anims/WASD = SubResource( 6 )
 
 [connection signal="animation_finished" from="CanvasLayer/Tutorial/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

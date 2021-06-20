@@ -7,7 +7,8 @@ export var sprint_spd = 25
 export var chase_spd = 33
 export var accel = 40
 
-export var hp = 3
+export var hp = 2
+export var max_hp = 2
 
 var cam_accel = 40
 var mouse_sens = 0.1
@@ -54,10 +55,11 @@ func _input(event):
 func _process(delta):
 	if hp == 0 and gameOverAnim:
 		animationPlayer.play("ScenesGameOver")
+		gameOver = true
 		gameOverAnim = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif hp > 3:
-		hp = 3
+	elif hp > max_hp:
+		hp = max_hp
 	elif hp < 0:
 		hp = 0
 	# camera physics interpolation in the case that physics get jittery from high refresh-rate monitor

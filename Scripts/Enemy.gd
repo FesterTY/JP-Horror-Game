@@ -3,7 +3,7 @@ extends KinematicBody
 signal destination_reached
 signal player_collide
 
-const WALK_SPEED = 9
+const WALK_SPEED = 8
 const CHASE_SPEED = 15
 enum STATE {PATROL, CHASE}
 
