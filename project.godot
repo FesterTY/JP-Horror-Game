@@ -32,6 +32,10 @@ window/size/fullscreen=true
 
 enabled=PoolStringArray(  )
 
+[global]
+
+export=false
+
 [input]
 
 move_forward={
