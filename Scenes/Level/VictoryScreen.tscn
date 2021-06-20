@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/BlackOverlay.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Sounds/Music/menu.mp3" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Sounds/Music/ambient.wav" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/Level/VictoryScreen.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Sounds/Environmental/woman_laugh.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Sounds/door.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/Fonts/HigherPixels.ttf"
@@ -13,7 +15,7 @@ font_data = SubResource( 1 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Credits"
-length = 12.0
+length = 45.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("MeCredit:modulate")
 tracks/0/interp = 1
@@ -21,7 +23,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 2.5, 3, 4 ),
+"times": PoolRealArray( 23.2, 24.3, 25.3, 25.8, 26.3, 27.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -33,7 +35,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 4, 5, 6, 6.5, 7, 8 ),
+"times": PoolRealArray( 28.7, 29.8, 30.8, 31.3, 31.8, 32.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -45,10 +47,78 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 8, 9, 10, 10.5, 11, 12 ),
+"times": PoolRealArray( 34.2, 35.3, 36.2, 36.7, 37.2, 38.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pages:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3, 4, 6, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Win:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 8, 9, 10.4, 11.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Win2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 12.5, 13.5, 15, 16.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("../SoundFX")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.3,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 18.1, 19.5 )
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("../AudioStreamPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 23.3 )
 }
 
 [node name="VictoryScreen" type="CanvasLayer"]
@@ -113,8 +183,61 @@ margin_top = -81.0
 margin_right = 477.5
 margin_bottom = 81.0
 custom_fonts/font = SubResource( 2 )
-text = "AND THANKS TO YOU
+text = "THANKS TO MR LAIRD
+AND TO YOU
 FOR PLAYING"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pages" type="Label" parent="Control"]
+modulate = Color( 1, 0, 0, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -477.5
+margin_top = -81.0
+margin_right = 477.5
+margin_bottom = 81.0
+custom_fonts/font = SubResource( 2 )
+text = "WITH 7 BOOKS IN HAND
+YOU GASP FOR AIR"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Win" type="Label" parent="Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -477.5
+margin_top = -81.0
+margin_right = 477.5
+margin_bottom = 81.0
+custom_fonts/font = SubResource( 2 )
+text = "YOU DID IT"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Win2" type="Label" parent="Control"]
+modulate = Color( 1, 0, 0, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -477.5
+margin_top = -81.0
+margin_right = 477.5
+margin_bottom = 81.0
+custom_fonts/font = SubResource( 2 )
+text = "YOU HAVE ESCAPED"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -125,3 +248,9 @@ anims/Credits = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = -20.0
+
+[node name="SoundFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[connection signal="animation_finished" from="Control/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

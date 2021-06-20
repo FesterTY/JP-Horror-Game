@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/icon.png-0e7c0247650c64c468830ef1a3387b2c.image"
+
+[deps]
+
+source_file="res://Icons/icon.png"
+dest_files=[ "res://.import/icon.png-0e7c0247650c64c468830ef1a3387b2c.image" ]
+
+[params]
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Models/Classroom/StudentDesk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Scenes/Level/WorldEnvironment.tres" type="Environment" id=19]
 [ext_resource path="res://Assets/Sounds/Music/ambient.wav" type="AudioStream" id=20]
 [ext_resource path="res://Scenes/Models/Books/book006.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/TutorialTrigger.tscn" type="PackedScene" id=22]
 
 [sub_resource type="SpatialMaterial" id=1]
 flags_world_triplanar = true
@@ -223,6 +224,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101.288, 1.3565, 31.2297 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.67826, 0.236351 )
 stream = ExtResource( 13 )
 unit_db = 10.0
+
+[node name="TutorialTriggers" type="Spatial" parent="."]
+
+[node name="TutorialTrigger" parent="TutorialTriggers" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 2.02728, -81.3009, 2.04845, 13.5597 )
+type = "WASD"
+
+[node name="TutorialTrigger2" parent="TutorialTriggers" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.76815, -69.2383, 2.94846, 14.0175 )
+type = "MOUSE"
+
+[node name="TutorialTrigger3" parent="TutorialTriggers" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 2.04568, -31.9499, 2.94846, 34.7919 )
+type = "PICKUP"
 
 [node name="MusicTween" type="Tween" parent="."]
 

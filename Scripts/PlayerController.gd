@@ -101,6 +101,7 @@ func _physics_process(delta):
 	# its move time!!
 	if hp <= 0:
 		movement = Vector3.ZERO
+		gameOver = true
 	elif adrenaline:
 		movement = Vector3().linear_interpolate(direction * chase_spd, accel * delta)
 		sprinting = false
